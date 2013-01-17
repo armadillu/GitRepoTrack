@@ -1305,13 +1305,13 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">271</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{892, 347}, {415, 400}}</string>
+				<string key="NSWindowRect">{{892, 347}, {350, 400}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">GitRepoTrack</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
-				<string key="NSWindowContentMinSize">{415, 400}</string>
+				<string key="NSWindowContentMinSize">{350, 400}</string>
 				<object class="NSView" key="NSWindowView" id="439893737">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -1327,7 +1327,7 @@
 										<object class="NSTableView" id="1060465259">
 											<reference key="NSNextResponder" ref="527315843"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{415, 334}</string>
+											<string key="NSFrameSize">{350, 334}</string>
 											<reference key="NSSuperview" ref="527315843"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="295355259"/>
@@ -1338,7 +1338,7 @@
 											<object class="NSTableHeaderView" key="NSHeaderView" id="978869594">
 												<reference key="NSNextResponder" ref="593323381"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrameSize">{415, 17}</string>
+												<string key="NSFrameSize">{350, 17}</string>
 												<reference key="NSSuperview" ref="593323381"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="888280780"/>
@@ -1439,7 +1439,7 @@
 												</object>
 												<object class="NSTableColumn" id="173559025">
 													<string key="NSIdentifier">path</string>
-													<double key="NSWidth">176</double>
+													<double key="NSWidth">111</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1529,7 +1529,7 @@
 											<int key="NSTableViewGroupRowStyle">1</int>
 										</object>
 									</array>
-									<string key="NSFrame">{{1, 17}, {415, 334}}</string>
+									<string key="NSFrame">{{1, 17}, {350, 334}}</string>
 									<reference key="NSSuperview" ref="727393593"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="1060465259"/>
@@ -1571,7 +1571,7 @@
 									<array class="NSMutableArray" key="NSSubviews">
 										<reference ref="978869594"/>
 									</array>
-									<string key="NSFrame">{{1, 0}, {415, 17}}</string>
+									<string key="NSFrame">{{1, 0}, {350, 17}}</string>
 									<reference key="NSSuperview" ref="727393593"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="978869594"/>
@@ -1581,7 +1581,7 @@
 								</object>
 								<reference ref="888280780"/>
 							</array>
-							<string key="NSFrame">{{-1, 49}, {417, 352}}</string>
+							<string key="NSFrame">{{-1, 49}, {352, 352}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="593323381"/>
@@ -1604,7 +1604,7 @@
 								<string>Apple URL pasteboard type</string>
 								<string>NSFilenamesPboardType</string>
 							</set>
-							<string key="NSFrame">{{55, 14}, {252, 20}}</string>
+							<string key="NSFrame">{{55, 14}, {187, 20}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="154022298"/>
@@ -1665,7 +1665,7 @@
 						<object class="NSButton" id="551246182">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{338, 11}, {57, 25}}</string>
+							<string key="NSFrame">{{273, 11}, {57, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
@@ -1723,7 +1723,7 @@
 						<object class="NSProgressIndicator" id="154022298">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{314, 15}, {16, 16}}</string>
+							<string key="NSFrame">{{249, 15}, {16, 16}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="551246182"/>
@@ -1732,13 +1732,13 @@
 							<double key="NSMaxValue">100</double>
 						</object>
 					</array>
-					<string key="NSFrameSize">{415, 400}</string>
+					<string key="NSFrameSize">{350, 400}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="727393593"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2048, 1130}}</string>
-				<string key="NSMinSize">{415, 422}</string>
+				<string key="NSMinSize">{350, 422}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -3020,11 +3020,11 @@
 						<int key="objectID">372</int>
 						<reference key="object" ref="439893737"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="727393593"/>
 							<reference ref="419206517"/>
 							<reference ref="815698434"/>
 							<reference ref="551246182"/>
 							<reference ref="154022298"/>
+							<reference ref="727393593"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
