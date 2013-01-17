@@ -163,6 +163,7 @@
     }
 
 	if ([[tableColumn identifier] isEqualTo: @"path"]){
+		[[tableColumn dataCell] setVerticalCentering:YES];
 		return s;
     }
 

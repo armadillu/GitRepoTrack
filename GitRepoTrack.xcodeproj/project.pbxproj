@@ -122,13 +122,13 @@
 				BBE37E0016A812E300D7F6EE /* AppDelegate.m */,
 				BBFEED0316A8397D00ADD2E1 /* MyImageView.h */,
 				BBFEED0416A8397D00ADD2E1 /* MyImageView.m */,
+				BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */,
+				BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */,
 				BBE37E0216A812E300D7F6EE /* MainMenu.xib */,
 				BB5CB26A16A858000064FA22 /* green@2x.png */,
 				BB5CB26B16A858000064FA22 /* red@2x.png */,
 				BBFEECDF16A8283300ADD2E1 /* showfile.png */,
 				BBE37DF416A812E300D7F6EE /* Supporting Files */,
-				BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */,
-				BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */,
 			);
 			path = GitRepoTrack;
 			sourceTree = "<group>";

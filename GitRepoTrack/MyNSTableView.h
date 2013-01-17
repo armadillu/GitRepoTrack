@@ -15,3 +15,8 @@
 
 @end
 
+//http://stackoverflow.com/questions/1235219/is-there-a-right-way-to-have-nstextfieldcell-draw-vertically-centered-text
+
+@interface NSTextFieldCell (MyCategories)
+- (void)setVerticalCentering:(BOOL)centerVertical;
+@end
