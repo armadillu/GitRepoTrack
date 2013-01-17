@@ -98,14 +98,17 @@
             //we have a list of file names in an NSData object
 			NSArray *fileArray = [paste propertyListForType:@"NSFilenamesPboardType"];
 			NSString *path = [fileArray objectAtIndex:0];
-			//NSLog(@"path: %@", path);
 			scanPath = path;
 			[scanPath retain];
-			[pathBar performSelectorOnMainThread:@selector(setURL:) withObject:[NSURL URLWithString:scanPath] waitUntilDone:NO];
+			NSURL * url = [NSURL URLWithString:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+			//NSLog(@"url: %@", url);
+
+			[pathBar performSelectorOnMainThread:@selector(setURL:) withObject:url waitUntilDone:NO];
 			[self performSelectorOnMainThread:@selector(savePrefs) withObject:nil waitUntilDone:NO];
 			//[pathBar setURL:[NSURL URLWithString:scanPath]];
 			//[self savePrefs];
 			NSImage * img = [[NSWorkspace sharedWorkspace] iconForFile: path];
+			//NSLog(@"img: %@", img);
 			[super setImage: img];
         }else{
             NSAssert(NO, @"This can't happen");
