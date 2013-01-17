@@ -1330,7 +1330,7 @@
 											<string key="NSFrameSize">{350, 334}</string>
 											<reference key="NSSuperview" ref="527315843"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="295355259"/>
+											<reference key="NSNextKeyView" ref="593323381"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -1584,7 +1584,7 @@
 							<string key="NSFrame">{{-1, 49}, {352, 352}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="593323381"/>
+							<reference key="NSNextKeyView" ref="527315843"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="295355259"/>
@@ -1611,8 +1611,8 @@
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPathCell" key="NSCell" id="586102481">
-								<int key="NSCellFlags">69206017</int>
-								<int key="NSCellFlags2">131072</int>
+								<int key="NSCellFlags">337641473</int>
+								<int key="NSCellFlags2">33685504</int>
 								<object class="NSURL" key="NSContents">
 									<nil key="NS.base"/>
 									<string key="NS.relative">file://localhost/Applications/</string>
@@ -1668,7 +1668,6 @@
 							<string key="NSFrame">{{273, 11}, {57, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:22</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="373545919">
@@ -3791,6 +3790,7 @@
 				<string key="561.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="562.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="565.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<reference key="566.IBPathControlIntegration.allowedTypes" ref="0"/>
 				<string key="566.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="567.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="568.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

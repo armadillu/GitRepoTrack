@@ -37,10 +37,10 @@
 	NSUserDefaults * d = [NSUserDefaults standardUserDefaults];
 	scanPath = [d objectForKey:@"scanPath"];
 	if(scanPath){
-		[pathBar setURL:[NSURL URLWithString:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+		[pathBar setURL:[NSURL fileURLWithPath:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	}else{
 		[self setImage: nil];
-		[pathBar setURL:[NSURL URLWithString:@"/"]];
+		[pathBar setURL:[NSURL fileURLWithPath:@"/"]];
 	}
 	NSImage * img = [[NSWorkspace sharedWorkspace] iconForFile: scanPath];
 	[super setImage: img];
@@ -100,7 +100,7 @@
 			NSString *path = [fileArray objectAtIndex:0];
 			scanPath = path;
 			[scanPath retain];
-			NSURL * url = [NSURL URLWithString:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+			NSURL * url = [NSURL fileURLWithPath:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 			//NSLog(@"url: %@", url);
 
 			[pathBar performSelectorOnMainThread:@selector(setURL:) withObject:url waitUntilDone:NO];
