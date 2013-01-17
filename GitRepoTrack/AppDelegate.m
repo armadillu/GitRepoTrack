@@ -177,28 +177,29 @@
 		}else{
 			s = [gitDirs objectAtIndex:row];
 		}
+
+		if ([[tableColumn identifier] isEqualTo: @"icon"]){
+			if([self string:s isInArray: dirtyGitRepos]){
+				return [NSImage imageNamed: @"red"];
+			}else{
+				return [NSImage imageNamed: @"green"];
+			}
+		}
+
+		if ([[tableColumn identifier] isEqualTo: @"path"]){
+			[[tableColumn dataCell] setVerticalCentering:YES];
+			return s;
+		}
+
+		if ([[tableColumn identifier] isEqualTo: @"repo"]){
+			return [s lastPathComponent];
+		}
+
+		if ([[tableColumn identifier] isEqualTo: @"reveal"]){
+			return [NSImage imageNamed: @"showfile.png"];
+		}
 	}
 
-	if ([[tableColumn identifier] isEqualTo: @"icon"]){
-		if([self string:s isInArray: dirtyGitRepos]){
-			return [NSImage imageNamed: @"red"];
-		}else{
-			return [NSImage imageNamed: @"green"];
-		}
-    }
-
-	if ([[tableColumn identifier] isEqualTo: @"path"]){
-		[[tableColumn dataCell] setVerticalCentering:YES];
-		return s;
-    }
-
-	if ([[tableColumn identifier] isEqualTo: @"repo"]){
-		return [s lastPathComponent];
-    }
-
-	if ([[tableColumn identifier] isEqualTo: @"reveal"]){
-		return [NSImage imageNamed: @"showfile.png"];
-    }
 	return nil;
 }
 

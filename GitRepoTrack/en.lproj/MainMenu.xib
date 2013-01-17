@@ -1733,7 +1733,7 @@
 							<int key="NSpiFlags">28938</int>
 							<double key="NSMaxValue">100</double>
 						</object>
-						<object class="NSSearchField" id="12548336">
+						<object class="NSSearchField" id="211908310">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">299</int>
 							<string key="NSFrame">{{222, 377}, {108, 19}}</string>
@@ -1742,14 +1742,14 @@
 							<reference key="NSNextKeyView" ref="727393593"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSSearchFieldCell" key="NSCell" id="549446810">
+							<object class="NSSearchFieldCell" key="NSCell" id="624162697">
 								<int key="NSCellFlags">343408704</int>
 								<int key="NSCellFlags2">268567616</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="26"/>
 								<string key="NSPlaceholderString">filter</string>
 								<string key="NSCellIdentifier">_NS:9</string>
-								<reference key="NSControlView" ref="12548336"/>
+								<reference key="NSControlView" ref="211908310"/>
 								<bool key="NSDrawsBackground">YES</bool>
 								<int key="NSTextBezelStyle">1</int>
 								<reference key="NSBackgroundColor" ref="460286684"/>
@@ -1758,9 +1758,9 @@
 									<int key="NSCellFlags">0</int>
 									<int key="NSCellFlags2">0</int>
 									<string key="NSContents">search</string>
-									<reference key="NSControlView" ref="12548336"/>
+									<reference key="NSControlView" ref="211908310"/>
 									<string key="NSAction">_searchFieldSearch:</string>
-									<reference key="NSTarget" ref="549446810"/>
+									<reference key="NSTarget" ref="624162697"/>
 									<int key="NSButtonFlags">138690560</int>
 									<int key="NSButtonFlags2">0</int>
 									<string key="NSKeyEquivalent"/>
@@ -1777,9 +1777,9 @@
 											<integer value="1" key="NSAccessibilityEncodedAttributesValueType"/>
 										</dictionary>
 									</array>
-									<reference key="NSControlView" ref="12548336"/>
+									<reference key="NSControlView" ref="211908310"/>
 									<string key="NSAction">_searchFieldCancel:</string>
-									<reference key="NSTarget" ref="549446810"/>
+									<reference key="NSTarget" ref="624162697"/>
 									<int key="NSButtonFlags">138690560</int>
 									<int key="NSButtonFlags2">0</int>
 									<string key="NSKeyEquivalent"/>
@@ -1795,7 +1795,7 @@
 					<string key="NSFrameSize">{350, 400}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="12548336"/>
+					<reference key="NSNextKeyView" ref="211908310"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2048, 1130}}</string>
 				<string key="NSMinSize">{350, 422}</string>
@@ -2535,7 +2535,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">filter</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="12548336"/>
+						<reference key="destination" ref="211908310"/>
 					</object>
 					<int key="connectionID">580</int>
 				</object>
@@ -2543,7 +2543,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">filterType:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="12548336"/>
+						<reference key="destination" ref="211908310"/>
 					</object>
 					<int key="connectionID">581</int>
 				</object>
@@ -3099,9 +3099,9 @@
 							<reference ref="815698434"/>
 							<reference ref="727393593"/>
 							<reference ref="419206517"/>
-							<reference ref="12548336"/>
 							<reference ref="154022298"/>
 							<reference ref="551246182"/>
+							<reference ref="211908310"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3713,16 +3713,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">578</int>
-						<reference key="object" ref="12548336"/>
+						<reference key="object" ref="211908310"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="549446810"/>
+							<reference ref="624162697"/>
 						</array>
 						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">579</int>
-						<reference key="object" ref="549446810"/>
-						<reference key="parent" ref="12548336"/>
+						<reference key="object" ref="624162697"/>
+						<reference key="parent" ref="211908310"/>
 					</object>
 				</array>
 			</object>
@@ -3910,7 +3910,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">581</int>
+			<int key="maxID">582</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
