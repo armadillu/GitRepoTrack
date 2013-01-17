@@ -17,13 +17,12 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
-
 	gitDirs = [[NSMutableArray alloc] initWithCapacity:100];
 	dirtyGitRepos = [[NSMutableArray alloc] initWithCapacity:100];
 }
 
--(IBAction)startScanButtonPressed:(id)sender;{
 
+-(IBAction)startScanButtonPressed:(id)sender;{
 	[gitDirs removeAllObjects];
 	[dirtyGitRepos removeAllObjects];
 	//[self startScan];
@@ -88,7 +87,9 @@
 
 	//if this dir contains a .git init, add to gitDirs and stop diving in that tree branch
 	if( [fm fileExistsAtPath:gitPath isDirectory:&isDir] ){
-		[gitDirs addObject: s];
+		@synchronized (self) {
+			[gitDirs addObject: s];
+		}
 		[self checkIfDirty:s];
 		//NSLog(@"This dir is a GIT repo! %@", gitPath);
 	}else{
@@ -136,14 +137,13 @@
 	}
 	NSString *cmd = [NSString stringWithFormat:@"clear; git status;", dir]; // Assumes bash, which is okay for me, but maybe not others.
 	TerminalTab *newTab = [termApp doScript:cmd in:window];
-
 }
 
 
 -(BOOL) string:(NSString*) s isInArray:(NSArray*)array{
 
 	for (NSString* item in array){
-		if ([item rangeOfString:s].location != NSNotFound){
+		if ([item rangeOfString:s ].location != NSNotFound){
 			return YES;
 		}
 	}
@@ -151,9 +151,34 @@
 }
 
 
+-(NSArray*)dirsThatMatch:(NSString*) s{
+
+	NSMutableArray * filteredArray = [NSMutableArray arrayWithCapacity:10];
+	@synchronized (self) {
+		for (NSString* item in gitDirs){
+			if ([[item lastPathComponent] rangeOfString:s options:NSCaseInsensitiveSearch].location != NSNotFound){
+				[filteredArray addObject:item];
+			}
+		}
+	}
+	return filteredArray;
+}
+
+
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(int)row{
 
-	NSString * s = [gitDirs objectAtIndex:row];
+	//NSString * s = [gitDirs objectAtIndex:row];
+
+	NSString * s;
+
+	@synchronized (self) {
+		if([filter.stringValue length] > 0){
+			s = [[self dirsThatMatch:filter.stringValue] objectAtIndex:row];
+		}else{
+			s = [gitDirs objectAtIndex:row];
+		}
+	}
+
 	if ([[tableColumn identifier] isEqualTo: @"icon"]){
 		if([self string:s isInArray: dirtyGitRepos]){
 			return [NSImage imageNamed: @"red"];
@@ -178,15 +203,37 @@
 }
 
 
+-(IBAction)filterType:(id)sender;{
+	[table reloadData];
+}
+
+
 - (int)numberOfRowsInTableView:(NSTableView *)tableView{
-    return [gitDirs count];
+    //return [gitDirs count];
+	@synchronized (self) {
+		if([filter.stringValue length] > 0){
+			return [[self dirsThatMatch:filter.stringValue] count];
+		}else{
+			return [gitDirs count];
+		}
+	}
 }
 
 - (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;{
-	NSString * s = [gitDirs objectAtIndex:row];
+
+	NSString * s;
+	@synchronized (self) {
+		if([filter.stringValue length] > 0){
+			s = [[self dirsThatMatch:filter.stringValue] objectAtIndex:row];
+		}else{
+			s = [gitDirs objectAtIndex:row];
+		}
+	}
+	NSLog(@"edit>>%@", s);
 	//NSURL *fileURL = [NSURL fileURLWithPath: s];
 	//[[NSWorkspace sharedWorkspace] openURL: fileURL];
 	[self openTerminal:self path: s];
+	[table deselectAll:nil];
 	return NO;
 }
 

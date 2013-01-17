@@ -18,11 +18,13 @@
 	IBOutlet MyImageView * drop;
 	IBOutlet NSButton * startButton;
 	IBOutlet NSProgressIndicator * progress;
+	IBOutlet NSTextField * filter;
 
 }
 
 
 -(IBAction)startScanButtonPressed:(id)sender;
+-(IBAction)filterType:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;
 
