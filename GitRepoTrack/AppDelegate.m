@@ -134,7 +134,7 @@
 	if (termApp.windows.count > 0){
 		window = [termApp.windows objectAtIndex:0];
 	}
-	NSString *cmd = [NSString stringWithFormat:@"clear", dir]; // Assumes bash, which is okay for me, but maybe not others.
+	NSString *cmd = [NSString stringWithFormat:@"clear; git status;", dir]; // Assumes bash, which is okay for me, but maybe not others.
 	TerminalTab *newTab = [termApp doScript:cmd in:window];
 
 }
