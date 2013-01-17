@@ -7,3 +7,5 @@ To use it, drop any folder that holds git repos onto the drop zone (bottom left)
 Repositories with uncommited changes will show a red status, and "clean" ones a green one. 
 
 You can double-click any repo on the list to open a terminal window at that location.
+
+![image](http://farm9.staticflickr.com/8056/8389907031_2e2e056e02.jpg)
