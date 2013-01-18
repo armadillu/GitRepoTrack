@@ -20,6 +20,8 @@
 	IBOutlet NSProgressIndicator * progress;
 	IBOutlet NSTextField * filter;
 
+	bool forceStop;
+	bool scanning;
 }
 
 

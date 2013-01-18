@@ -19,25 +19,51 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	gitDirs = [[NSMutableArray alloc] initWithCapacity:100];
 	dirtyGitRepos = [[NSMutableArray alloc] initWithCapacity:100];
+	scanning = false;
+
+	//auto start scan at launch if a path is already set
+	NSUserDefaults * d = [NSUserDefaults standardUserDefaults];
+	NSString * scanPath = [d objectForKey:@"scanPath"];
+	if (scanPath){
+		BOOL isDir;
+		if( [[NSFileManager defaultManager] fileExistsAtPath:scanPath isDirectory: &isDir]){
+			if(isDir){
+				[self startScanButtonPressed:self];
+			}
+		}
+	}
+
 }
 
 
 -(IBAction)startScanButtonPressed:(id)sender;{
-	[gitDirs removeAllObjects];
-	[dirtyGitRepos removeAllObjects];
-	//[self startScan];
-	[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
-	[startButton setEnabled:false];
-	[progress startAnimation:self];
+
+	if (!scanning){ // start the scan!
+		[gitDirs removeAllObjects];
+		[dirtyGitRepos removeAllObjects];
+		//[self startScan];
+		[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
+	}else{	//stop the scan!
+		forceStop = true;
+	}
+
 }
 
 
 -(void)doScan{
 
+	forceStop = false;
+	scanning = true;
+	//[startButton setEnabled:false];
+	[startButton setTitle:@"Stop Scan!"];
+	[progress startAnimation:self];
+
 	NSString * startAt = [[drop getPath] retain];
 	[self scan:startAt];
-	[startButton setEnabled:true];
+	//[startButton setEnabled:true];
+	[startButton setTitle:@"Scan!"];
 	[progress stopAnimation:self];
+	scanning = false;
 
 }
 -(void)updateTable{
@@ -78,6 +104,8 @@
 
 
 -(void)scan:(NSString *) s{
+
+	if(forceStop) return; // stop scan if asked to do so
 
 	NSFileManager * fm = [NSFileManager defaultManager];
 
