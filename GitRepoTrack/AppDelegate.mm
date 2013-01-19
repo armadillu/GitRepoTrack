@@ -75,6 +75,12 @@
 	}
 }
 
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+    return YES;
+}
+
+
 -(void)checkIfDirty:(NSString *) s{
 	
 	NSTask * task = [[NSTask alloc] init];
