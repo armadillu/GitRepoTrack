@@ -14,7 +14,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
 	NSMutableArray * gitDirs;
-	std::vector<int> numModifiedFiles;
+	NSMutableDictionary* numModifiedFiles;
 	NSMutableArray * dirtyGitRepos;
 	IBOutlet NSTableView * table;
 	IBOutlet MyImageView * drop;

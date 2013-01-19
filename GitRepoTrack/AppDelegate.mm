@@ -19,6 +19,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	gitDirs = [[NSMutableArray alloc] initWithCapacity:100];
 	dirtyGitRepos = [[NSMutableArray alloc] initWithCapacity:100];
+	numModifiedFiles = [[NSMutableDictionary alloc] initWithCapacity:100];
 	scanning = false;
 
 	//auto start scan at launch if a path is already set
@@ -40,7 +41,7 @@
 
 	if (!scanning){ // start the scan!
 		[gitDirs removeAllObjects];
-		numModifiedFiles.clear();
+		[numModifiedFiles removeAllObjects];
 		[dirtyGitRepos removeAllObjects];
 		//[self startScan];
 		[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
@@ -96,8 +97,7 @@
 		//NSLog(@"This Git Repo is dirty: %@", s);
 		@synchronized (self) {
 			[dirtyGitRepos addObject:s];
-		}
-		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
+		}		
 	}
 	[string release];
 }
@@ -126,10 +126,10 @@
 	if ([string length] > 0){
 		int val = [string intValue];
 		//NSLog(@"This Git Repo has _%@_ mod files (%d)", string, val);
-		numModifiedFiles.push_back(val);
+		[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		//[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
 	}else{
-		numModifiedFiles.push_back(0);
+		[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 	}
 	[string release];
 }
@@ -152,6 +152,7 @@
 		}
 		[self checkIfDirty:s];
 		[self checkNumberOfModifiedFiles:s];
+		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
 		//NSLog(@"This dir is a GIT repo! %@", gitPath);
 	}else{
 
@@ -233,42 +234,44 @@
 	NSString * s;
 
 	@synchronized (self) {
+		
 		if([filter.stringValue length] > 0){
 			s = [[self dirsThatMatch:filter.stringValue] objectAtIndex:row];
 		}else{
 			s = [gitDirs objectAtIndex:row];
 		}
-
+		
 		if ([[tableColumn identifier] isEqualTo: @"icon"]){
 			if([self string:s isInArray: dirtyGitRepos]){
 				return [NSImage imageNamed: @"red"];
 			}else{
 				return [NSImage imageNamed: @"green"];
 			}
-		}
-
+		}else
 
 
 		if ([[tableColumn identifier] isEqualTo: @"num"]){
-			if ( row < numModifiedFiles.size() ){
+			if ( row < [numModifiedFiles count] ){
 				[[tableColumn dataCell] setVerticalCentering:YES];
-				if ( numModifiedFiles[row] > 0 ){
-					return [NSString stringWithFormat:@"%d",numModifiedFiles[row] ];
+				int val = [[numModifiedFiles objectForKey:s] intValue];
+				if ( val > 0 ){
+					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
+					return [NSString stringWithFormat:@"%d", val];
 				}else{
-					@"";
+					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:112/255. green:167/255. blue:37/255. alpha:1]];
+					return nil;
 				}
 			}
-		}
-
+		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"path"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
 			return s;
-		}
+		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"repo"]){
 			return [s lastPathComponent];
-		}
+		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"reveal"]){
 			return [NSImage imageNamed: @"showfile.png"];
