@@ -9,10 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import <ScriptingBridge/ScriptingBridge.h>
 #import "MyImageView.h"
+#include <vector>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
 	NSMutableArray * gitDirs;
+	std::vector<int> numModifiedFiles;
 	NSMutableArray * dirtyGitRepos;
 	IBOutlet NSTableView * table;
 	IBOutlet MyImageView * drop;

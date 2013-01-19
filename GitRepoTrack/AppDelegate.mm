@@ -40,6 +40,7 @@
 
 	if (!scanning){ // start the scan!
 		[gitDirs removeAllObjects];
+		numModifiedFiles.clear();
 		[dirtyGitRepos removeAllObjects];
 		//[self startScan];
 		[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
@@ -96,8 +97,39 @@
 		@synchronized (self) {
 			[dirtyGitRepos addObject:s];
 		}
-		//[self checkIfDirty:s];
 		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
+	}
+	[string release];
+}
+
+
+-(void)checkNumberOfModifiedFiles:(NSString *) s{
+
+	NSTask * task = [[NSTask alloc] init];
+	[task setLaunchPath:@"/bin/sh"];
+	[task setCurrentDirectoryPath:s];
+	// /bin/sh -c trick to complex pipes from http://borkware.com/quickies/one?topic=nstask
+	//git status | grep 'modified:' | awk ' { print $3 } ' | wc -l
+	[task setArguments:[NSArray arrayWithObjects:@"-c", @"/usr/bin/git status | grep 'modified:' | awk ' { print $3 } ' | wc -l",  nil]];
+
+	NSPipe *pipe = [NSPipe pipe];
+	[task setStandardOutput:pipe];
+	[task launch];
+
+	NSData * data = [[pipe fileHandleForReading] readDataToEndOfFile];
+
+	[task waitUntilExit];
+	[task release];
+
+	NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+	if ([string length] > 0){
+		int val = [string intValue];
+		//NSLog(@"This Git Repo has _%@_ mod files (%d)", string, val);
+		numModifiedFiles.push_back(val);
+		//[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
+	}else{
+		numModifiedFiles.push_back(0);
 	}
 	[string release];
 }
@@ -119,6 +151,7 @@
 			[gitDirs addObject: s];
 		}
 		[self checkIfDirty:s];
+		[self checkNumberOfModifiedFiles:s];
 		//NSLog(@"This dir is a GIT repo! %@", gitPath);
 	}else{
 
@@ -213,6 +246,20 @@
 				return [NSImage imageNamed: @"green"];
 			}
 		}
+
+
+
+		if ([[tableColumn identifier] isEqualTo: @"num"]){
+			if ( row < numModifiedFiles.size() ){
+				[[tableColumn dataCell] setVerticalCentering:YES];
+				if ( numModifiedFiles[row] > 0 ){
+					return [NSString stringWithFormat:@"%d",numModifiedFiles[row] ];
+				}else{
+					@"";
+				}
+			}
+		}
+
 
 		if ([[tableColumn identifier] isEqualTo: @"path"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];

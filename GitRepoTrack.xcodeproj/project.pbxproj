@@ -15,7 +15,7 @@
 		BBE37DF816A812E300D7F6EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBE37DF616A812E300D7F6EE /* InfoPlist.strings */; };
 		BBE37DFA16A812E300D7F6EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE37DF916A812E300D7F6EE /* main.m */; };
 		BBE37DFE16A812E300D7F6EE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BBE37DFC16A812E300D7F6EE /* Credits.rtf */; };
-		BBE37E0116A812E300D7F6EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE37E0016A812E300D7F6EE /* AppDelegate.m */; };
+		BBE37E0116A812E300D7F6EE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBE37E0016A812E300D7F6EE /* AppDelegate.mm */; };
 		BBE37E0416A812E300D7F6EE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBE37E0216A812E300D7F6EE /* MainMenu.xib */; };
 		BBFEECE016A8283300ADD2E1 /* showfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BBFEECDF16A8283300ADD2E1 /* showfile.png */; };
 		BBFEECE716A82AC400ADD2E1 /* MyNSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */; };
@@ -53,7 +53,7 @@
 		BBE37DFB16A812E300D7F6EE /* GitRepoTrack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitRepoTrack-Prefix.pch"; sourceTree = "<group>"; };
 		BBE37DFD16A812E300D7F6EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		BBE37DFF16A812E300D7F6EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BBE37E0016A812E300D7F6EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BBE37E0016A812E300D7F6EE /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		BBE37E0316A812E300D7F6EE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BBFEECDF16A8283300ADD2E1 /* showfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showfile.png; sourceTree = "<group>"; };
 		BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNSTableView.h; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			children = (
 				BB5CB25B16A84E290064FA22 /* QuestionBlock.icns */,
 				BBE37DFF16A812E300D7F6EE /* AppDelegate.h */,
-				BBE37E0016A812E300D7F6EE /* AppDelegate.m */,
+				BBE37E0016A812E300D7F6EE /* AppDelegate.mm */,
 				BBFEED0316A8397D00ADD2E1 /* MyImageView.h */,
 				BBFEED0416A8397D00ADD2E1 /* MyImageView.m */,
 				BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */,
@@ -216,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBE37DFA16A812E300D7F6EE /* main.m in Sources */,
-				BBE37E0116A812E300D7F6EE /* AppDelegate.m in Sources */,
+				BBE37E0116A812E300D7F6EE /* AppDelegate.mm in Sources */,
 				BBFEED0516A8398D00ADD2E1 /* MyImageView.m in Sources */,
 				BBFEECE716A82AC400ADD2E1 /* MyNSTableView.m in Sources */,
 			);
@@ -306,6 +306,8 @@
 		BBE37E0816A812E300D7F6EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GitRepoTrack/GitRepoTrack-Prefix.pch";
@@ -319,6 +321,8 @@
 		BBE37E0916A812E300D7F6EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GitRepoTrack/GitRepoTrack-Prefix.pch";
