@@ -10,12 +10,27 @@
 #import <ScriptingBridge/ScriptingBridge.h>
 #import "MyImageView.h"
 #include <vector>
+#include <map>
+#include <string>
+
+using namespace std;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
+	struct gitRepoStat{
+		gitRepoStat(){ localModifications = 0; hasRemote = false; remoteModifications = 0; remoteName = ""; isDirty = false;}
+		int localModifications; //num
+		bool hasRemote;
+		bool isDirty; //has local changes
+		string remoteName;
+		string remoteDiffs;
+		int remoteModifications; //todo
+	};
 	NSMutableArray * gitDirs;
+
 	NSMutableDictionary* numModifiedFiles;
-	NSMutableArray * dirtyGitRepos;
+	map<string, gitRepoStat> gitDirStats;
+
 	IBOutlet NSTableView * table;
 	IBOutlet MyImageView * drop;
 	IBOutlet NSButton * startButton;

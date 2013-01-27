@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB507C8716B5926A00EFD6DD /* orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8516B5926A00EFD6DD /* orange@2x.png */; };
+		BB507C8816B5926A00EFD6DD /* yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8616B5926A00EFD6DD /* yellow@2x.png */; };
+		BB507C8C16B594C700EFD6DD /* gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8B16B594C700EFD6DD /* gray@2x.png */; };
+		BB507C8E16B594FE00EFD6DD /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8D16B594FE00EFD6DD /* blue@2x.png */; };
 		BB5CB25916A84D010064FA22 /* Terminal.app in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB25816A84D010064FA22 /* Terminal.app */; };
 		BB5CB25C16A84E290064FA22 /* QuestionBlock.icns in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB25B16A84E290064FA22 /* QuestionBlock.icns */; };
 		BB5CB26C16A858000064FA22 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB26A16A858000064FA22 /* green@2x.png */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		BB507C8516B5926A00EFD6DD /* orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orange@2x.png"; sourceTree = "<group>"; };
+		BB507C8616B5926A00EFD6DD /* yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow@2x.png"; sourceTree = "<group>"; };
+		BB507C8B16B594C700EFD6DD /* gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray@2x.png"; sourceTree = "<group>"; };
+		BB507C8D16B594FE00EFD6DD /* blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue@2x.png"; sourceTree = "<group>"; };
 		BB5CB25816A84D010064FA22 /* Terminal.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Terminal.app; path = "/Users/oriol/Programming/svn.uri.cat/Mac Software/GitRepoTrack/../../../../../../Applications/Utilities/Terminal.app"; sourceTree = "<absolute>"; };
 		BB5CB25B16A84E290064FA22 /* QuestionBlock.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = QuestionBlock.icns; sourceTree = "<group>"; };
 		BB5CB26A16A858000064FA22 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
@@ -76,6 +84,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB507C8A16B5926C00EFD6DD /* img */ = {
+			isa = PBXGroup;
+			children = (
+				BB5CB26A16A858000064FA22 /* green@2x.png */,
+				BB5CB26B16A858000064FA22 /* red@2x.png */,
+				BB507C8516B5926A00EFD6DD /* orange@2x.png */,
+				BB507C8D16B594FE00EFD6DD /* blue@2x.png */,
+				BB507C8616B5926A00EFD6DD /* yellow@2x.png */,
+				BB507C8B16B594C700EFD6DD /* gray@2x.png */,
+				BBFEECDF16A8283300ADD2E1 /* showfile.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 		BBE37DDE16A812E300D7F6EE = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +146,8 @@
 				BBFEED0416A8397D00ADD2E1 /* MyImageView.m */,
 				BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */,
 				BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */,
+				BB507C8A16B5926C00EFD6DD /* img */,
 				BBE37E0216A812E300D7F6EE /* MainMenu.xib */,
-				BB5CB26A16A858000064FA22 /* green@2x.png */,
-				BB5CB26B16A858000064FA22 /* red@2x.png */,
-				BBFEECDF16A8283300ADD2E1 /* showfile.png */,
 				BBE37DF416A812E300D7F6EE /* Supporting Files */,
 			);
 			path = GitRepoTrack;
@@ -205,6 +225,10 @@
 				BB5CB25C16A84E290064FA22 /* QuestionBlock.icns in Resources */,
 				BB5CB26C16A858000064FA22 /* green@2x.png in Resources */,
 				BB5CB26D16A858000064FA22 /* red@2x.png in Resources */,
+				BB507C8716B5926A00EFD6DD /* orange@2x.png in Resources */,
+				BB507C8816B5926A00EFD6DD /* yellow@2x.png in Resources */,
+				BB507C8C16B594C700EFD6DD /* gray@2x.png in Resources */,
+				BB507C8E16B594FE00EFD6DD /* blue@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
