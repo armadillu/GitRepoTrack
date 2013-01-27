@@ -28,14 +28,16 @@ using namespace std;
 	};
 	NSMutableArray * gitDirs;
 
-	NSMutableDictionary* numModifiedFiles;
+	//NSMutableDictionary* numModifiedFiles;
 	map<string, gitRepoStat> gitDirStats;
 
 	IBOutlet NSTableView * table;
 	IBOutlet MyImageView * drop;
 	IBOutlet NSButton * startButton;
+	IBOutlet NSButton * checkRemoteCheckbox;
 	IBOutlet NSProgressIndicator * progress;
 	IBOutlet NSTextField * filter;
+
 
 	bool forceStop;
 	bool scanning;
@@ -43,6 +45,7 @@ using namespace std;
 
 
 -(IBAction)startScanButtonPressed:(id)sender;
+-(IBAction)checkRemoteCheckboxPressed:(id)sender;
 -(IBAction)filterType:(id)sender;
 
 @property (assign) IBOutlet NSWindow *window;

@@ -21,12 +21,14 @@ using namespace std;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	gitDirs = [[NSMutableArray alloc] initWithCapacity:100];
-	numModifiedFiles = [[NSMutableDictionary alloc] initWithCapacity:100];
+	//numModifiedFiles = [[NSMutableDictionary alloc] initWithCapacity:100];
 	scanning = false;
 
 	//auto start scan at launch if a path is already set
 	NSUserDefaults * d = [NSUserDefaults standardUserDefaults];
 	NSString * scanPath = [d objectForKey:@"scanPath"];
+	[checkRemoteCheckbox setState:[d integerForKey:@"checkRemotes"]];
+
 	if (scanPath){
 		BOOL isDir;
 		if( [[NSFileManager defaultManager] fileExistsAtPath:scanPath isDirectory: &isDir]){
@@ -38,12 +40,19 @@ using namespace std;
 
 }
 
+-(IBAction)checkRemoteCheckboxPressed:(id)sender;{
+
+	NSUserDefaults * d = [NSUserDefaults standardUserDefaults];
+	[d setInteger:[sender state] forKey:@"checkRemotes"];
+	[d synchronize];
+}
+
 
 -(IBAction)startScanButtonPressed:(id)sender;{
 
 	if (!scanning){ // start the scan!
 		[gitDirs removeAllObjects];
-		[numModifiedFiles removeAllObjects];
+		//[numModifiedFiles removeAllObjects];
 		gitDirStats.clear();
 		//[self startScan];
 		[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
@@ -140,10 +149,10 @@ using namespace std;
 	if ([string length] > 0){
 		int val = [string intValue];
 		NSLog(@"This Git Repo has _%@_ mod files (%d)", @"", val);
-		[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
+		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.localModifications = val;
 	}else{
-		[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
+		//[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 		stat.localModifications = 0;
 	}
 	gitDirStats[key] = stat;
@@ -171,7 +180,7 @@ using namespace std;
 	if ([string length] > 0){
 		NSLog(@"This Git Repo (%@) has a remote _%@_ ", [s lastPathComponent], string);
 		int val = [string intValue];
-		[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
+		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.hasRemote = true;
 		NSArray * comp = [string componentsSeparatedByString:@":"];
 		if( [comp count] > 1){
@@ -181,7 +190,7 @@ using namespace std;
 		}
 	}else{
 		NSLog(@"This Git Repo (%@) has NO remote", [s lastPathComponent]);
-		[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
+		//[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 		stat.hasRemote = false;
 	}
 	gitDirStats[key] = stat;
@@ -211,10 +220,10 @@ using namespace std;
 	if ([string length] > 0){
 		NSLog(@"This Git Repo (%@) has a remote diff _%@_ ", [s lastPathComponent], string);
 		int val = [string intValue];
-		[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
+		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		NSArray * comp = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] componentsSeparatedByString:@","];
 		if ([comp count] > 1){
-			stat.remoteDiffs = [[comp objectAtIndex:0] UTF8String];
+			stat.remoteDiffs = [[[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@" changed" withString:@""] UTF8String];
 		}else{
 			stat.remoteDiffs = "???";
 		}
@@ -245,9 +254,11 @@ using namespace std;
 		}
 		[self checkIfDirty:s];
 		[self checkNumberOfModifiedFiles:s];
-		BOOL hasRemote = [self checkForRemote:s];
-		if (hasRemote){
-			[self remoteDiff:s];
+		if ( [checkRemoteCheckbox state]){
+			BOOL hasRemote = [self checkForRemote:s];
+			if (hasRemote){
+				[self remoteDiff:s];
+			}
 		}
 		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
 		//NSLog(@"This dir is a GIT repo! %@", gitPath);
@@ -350,12 +361,12 @@ using namespace std;
 
 				if (stat.hasRemote){
 					if(stat.remoteDiffs == ""){ //nothing pending on remote
-						return [NSImage imageNamed: @"gray"]; //code away! u r in sync with remote
+						return [NSImage imageNamed: @"green"]; //code away! u r in sync with remote
 					}else{	//remote has newer stuff, we are old
 						return [NSImage imageNamed: @"blue"];	//u should pull!
 					}
 				}else{	//only local
-					return [NSImage imageNamed: @"gray"];
+					return [NSImage imageNamed: @"green"];
 				}
 			}else{ //local repo is dirty
 				if (stat.hasRemote){
@@ -373,13 +384,12 @@ using namespace std;
 
 		if ([[tableColumn identifier] isEqualTo: @"numLocal"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			if ( row < [numModifiedFiles count] ){
-				int val = [[numModifiedFiles objectForKey:s] intValue];
+			if ( row < gitDirStats.size() ){
 				std::string key = [s UTF8String];
-				//val = gitDirStats[key].localModifications;
+				int val = gitDirStats[key].localModifications;
 				if ( val > 0 ){
 					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
-					return [NSString stringWithFormat:@"%d files changed", val];
+					return [NSString stringWithFormat:@"%d files", val];
 				}else{
 					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:112/255. green:167/255. blue:37/255. alpha:1]];
 					return nil;
@@ -390,7 +400,7 @@ using namespace std;
 
 		if ([[tableColumn identifier] isEqualTo: @"remoteName"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			if ( row < [numModifiedFiles count] ){
+			if ( row < gitDirStats.size() ){
 
 				std::string key = [s UTF8String];
 				gitRepoStat stat = gitDirStats[key];
@@ -407,7 +417,7 @@ using namespace std;
 
 		if ([[tableColumn identifier] isEqualTo: @"remoteDiff"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			if ( row < [numModifiedFiles count] ){
+			if ( row < gitDirStats.size() ){
 				std::string key = [s UTF8String];
 				gitRepoStat stat = gitDirStats[key];
 				//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
