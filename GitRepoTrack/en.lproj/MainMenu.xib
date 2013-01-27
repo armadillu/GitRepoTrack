@@ -1767,7 +1767,7 @@
 						</object>
 						<object class="NSSearchField" id="211908310">
 							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">299</int>
+							<int key="NSvFlags">267</int>
 							<string key="NSFrame">{{222, 377}, {108, 19}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
