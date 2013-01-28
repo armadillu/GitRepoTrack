@@ -7,21 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB507C8716B5926A00EFD6DD /* orange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8516B5926A00EFD6DD /* orange@2x.png */; };
-		BB507C8816B5926A00EFD6DD /* yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8616B5926A00EFD6DD /* yellow@2x.png */; };
-		BB507C8C16B594C700EFD6DD /* gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8B16B594C700EFD6DD /* gray@2x.png */; };
-		BB507C8E16B594FE00EFD6DD /* blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB507C8D16B594FE00EFD6DD /* blue@2x.png */; };
 		BB5CB25916A84D010064FA22 /* Terminal.app in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB25816A84D010064FA22 /* Terminal.app */; };
 		BB5CB25C16A84E290064FA22 /* QuestionBlock.icns in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB25B16A84E290064FA22 /* QuestionBlock.icns */; };
-		BB5CB26C16A858000064FA22 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB26A16A858000064FA22 /* green@2x.png */; };
-		BB5CB26D16A858000064FA22 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5CB26B16A858000064FA22 /* red@2x.png */; };
+		BBCDA4D016B5EA2F002BD500 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4C916B5EA2F002BD500 /* 4@2x.png */; };
+		BBCDA4D116B5EA2F002BD500 /* 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4CA16B5EA2F002BD500 /* 6@2x.png */; };
+		BBCDA4D316B5EA2F002BD500 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4CC16B5EA2F002BD500 /* 1@2x.png */; };
+		BBCDA4D416B5EA2F002BD500 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4CD16B5EA2F002BD500 /* 2@2x.png */; };
+		BBCDA4D516B5EA2F002BD500 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4CE16B5EA2F002BD500 /* 3@2x.png */; };
+		BBCDA4D616B5EA2F002BD500 /* 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCDA4CF16B5EA2F002BD500 /* 5@2x.png */; };
 		BBE37DEE16A812E300D7F6EE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE37DED16A812E300D7F6EE /* Cocoa.framework */; };
 		BBE37DF816A812E300D7F6EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBE37DF616A812E300D7F6EE /* InfoPlist.strings */; };
 		BBE37DFA16A812E300D7F6EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE37DF916A812E300D7F6EE /* main.m */; };
 		BBE37DFE16A812E300D7F6EE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BBE37DFC16A812E300D7F6EE /* Credits.rtf */; };
 		BBE37E0116A812E300D7F6EE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBE37E0016A812E300D7F6EE /* AppDelegate.mm */; };
 		BBE37E0416A812E300D7F6EE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBE37E0216A812E300D7F6EE /* MainMenu.xib */; };
-		BBFEECE016A8283300ADD2E1 /* showfile.png in Resources */ = {isa = PBXBuildFile; fileRef = BBFEECDF16A8283300ADD2E1 /* showfile.png */; };
 		BBFEECE716A82AC400ADD2E1 /* MyNSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */; };
 		BBFEECE916A82F0E00ADD2E1 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFEECE816A82F0E00ADD2E1 /* ScriptingBridge.framework */; };
 		BBFEED0516A8398D00ADD2E1 /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFEED0416A8397D00ADD2E1 /* MyImageView.m */; };
@@ -42,14 +41,14 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-		BB507C8516B5926A00EFD6DD /* orange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orange@2x.png"; sourceTree = "<group>"; };
-		BB507C8616B5926A00EFD6DD /* yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow@2x.png"; sourceTree = "<group>"; };
-		BB507C8B16B594C700EFD6DD /* gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray@2x.png"; sourceTree = "<group>"; };
-		BB507C8D16B594FE00EFD6DD /* blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue@2x.png"; sourceTree = "<group>"; };
 		BB5CB25816A84D010064FA22 /* Terminal.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Terminal.app; path = "/Users/oriol/Programming/svn.uri.cat/Mac Software/GitRepoTrack/../../../../../../Applications/Utilities/Terminal.app"; sourceTree = "<absolute>"; };
 		BB5CB25B16A84E290064FA22 /* QuestionBlock.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = QuestionBlock.icns; sourceTree = "<group>"; };
-		BB5CB26A16A858000064FA22 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
-		BB5CB26B16A858000064FA22 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
+		BBCDA4C916B5EA2F002BD500 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
+		BBCDA4CA16B5EA2F002BD500 /* 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6@2x.png"; sourceTree = "<group>"; };
+		BBCDA4CC16B5EA2F002BD500 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
+		BBCDA4CD16B5EA2F002BD500 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
+		BBCDA4CE16B5EA2F002BD500 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
+		BBCDA4CF16B5EA2F002BD500 /* 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5@2x.png"; sourceTree = "<group>"; };
 		BBE37DE916A812E300D7F6EE /* GitRepoTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitRepoTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE37DED16A812E300D7F6EE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BBE37DF016A812E300D7F6EE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -63,7 +62,6 @@
 		BBE37DFF16A812E300D7F6EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BBE37E0016A812E300D7F6EE /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		BBE37E0316A812E300D7F6EE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BBFEECDF16A8283300ADD2E1 /* showfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = showfile.png; sourceTree = "<group>"; };
 		BBFEECE516A82AC400ADD2E1 /* MyNSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNSTableView.h; sourceTree = "<group>"; };
 		BBFEECE616A82AC400ADD2E1 /* MyNSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNSTableView.m; sourceTree = "<group>"; };
 		BBFEECE816A82F0E00ADD2E1 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -87,13 +85,12 @@
 		BB507C8A16B5926C00EFD6DD /* img */ = {
 			isa = PBXGroup;
 			children = (
-				BB5CB26A16A858000064FA22 /* green@2x.png */,
-				BB5CB26B16A858000064FA22 /* red@2x.png */,
-				BB507C8516B5926A00EFD6DD /* orange@2x.png */,
-				BB507C8D16B594FE00EFD6DD /* blue@2x.png */,
-				BB507C8616B5926A00EFD6DD /* yellow@2x.png */,
-				BB507C8B16B594C700EFD6DD /* gray@2x.png */,
-				BBFEECDF16A8283300ADD2E1 /* showfile.png */,
+				BBCDA4C916B5EA2F002BD500 /* 4@2x.png */,
+				BBCDA4CA16B5EA2F002BD500 /* 6@2x.png */,
+				BBCDA4CC16B5EA2F002BD500 /* 1@2x.png */,
+				BBCDA4CD16B5EA2F002BD500 /* 2@2x.png */,
+				BBCDA4CE16B5EA2F002BD500 /* 3@2x.png */,
+				BBCDA4CF16B5EA2F002BD500 /* 5@2x.png */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -220,15 +217,14 @@
 				BBE37DF816A812E300D7F6EE /* InfoPlist.strings in Resources */,
 				BBE37DFE16A812E300D7F6EE /* Credits.rtf in Resources */,
 				BBE37E0416A812E300D7F6EE /* MainMenu.xib in Resources */,
-				BBFEECE016A8283300ADD2E1 /* showfile.png in Resources */,
 				BB5CB25916A84D010064FA22 /* Terminal.app in Resources */,
 				BB5CB25C16A84E290064FA22 /* QuestionBlock.icns in Resources */,
-				BB5CB26C16A858000064FA22 /* green@2x.png in Resources */,
-				BB5CB26D16A858000064FA22 /* red@2x.png in Resources */,
-				BB507C8716B5926A00EFD6DD /* orange@2x.png in Resources */,
-				BB507C8816B5926A00EFD6DD /* yellow@2x.png in Resources */,
-				BB507C8C16B594C700EFD6DD /* gray@2x.png in Resources */,
-				BB507C8E16B594FE00EFD6DD /* blue@2x.png in Resources */,
+				BBCDA4D016B5EA2F002BD500 /* 4@2x.png in Resources */,
+				BBCDA4D116B5EA2F002BD500 /* 6@2x.png in Resources */,
+				BBCDA4D316B5EA2F002BD500 /* 1@2x.png in Resources */,
+				BBCDA4D416B5EA2F002BD500 /* 2@2x.png in Resources */,
+				BBCDA4D516B5EA2F002BD500 /* 3@2x.png in Resources */,
+				BBCDA4D616B5EA2F002BD500 /* 5@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

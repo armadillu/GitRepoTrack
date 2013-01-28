@@ -54,6 +54,7 @@ using namespace std;
 		[gitDirs removeAllObjects];
 		//[numModifiedFiles removeAllObjects];
 		gitDirStats.clear();
+		[table reloadData];
 		//[self startScan];
 		[NSThread detachNewThreadSelector:@selector(doScan) toTarget:self withObject:nil];
 	}else{	//stop the scan!
@@ -95,24 +96,20 @@ using namespace std;
 -(void)checkIfDirty:(NSString *) s{
 	
 	NSTask * task = [[NSTask alloc] init];
-	[task setLaunchPath:@"/usr/bin/git"];
+	[task setLaunchPath:@"/bin/sh"];
 	[task setCurrentDirectoryPath:s];
-	[task setArguments:[NSArray arrayWithObjects:@"status", @"-s", nil]];
-
+	[task setArguments:[NSArray arrayWithObjects:@"-c", @"/usr/bin/git status | grep 'modified:'", nil]];
 	NSPipe *pipe = [NSPipe pipe];
 	[task setStandardOutput:pipe];
 	[task launch];
-
 	NSData * data = [[pipe fileHandleForReading] readDataToEndOfFile];
-
 	[task waitUntilExit];
 	[task release];
-
 	NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
 	if ([string length] > 0){
 		std::string key = [s UTF8String];
-		//NSLog(@"This Git Repo is dirty: %@", s);
+		//NSLog(@"This Git Repo is dirty: %@ >> %@", s, string);
 		@synchronized (self) {
 			gitRepoStat stat = gitDirStats[key];
 			stat.isDirty = true;
@@ -148,7 +145,7 @@ using namespace std;
 
 	if ([string length] > 0){
 		int val = [string intValue];
-		NSLog(@"This Git Repo has _%@_ mod files (%d)", @"", val);
+		//NSLog(@"This Git Repo has _%@_ mod files (%d)", @"", val);
 		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.localModifications = val;
 	}else{
@@ -178,18 +175,13 @@ using namespace std;
 	std::string key = [s UTF8String];
 	gitRepoStat stat = gitDirStats[key];
 	if ([string length] > 0){
-		NSLog(@"This Git Repo (%@) has a remote _%@_ ", [s lastPathComponent], string);
+		//NSLog(@"This Git Repo (%@) has a remote _%@_ ", [s lastPathComponent], string);
 		int val = [string intValue];
 		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.hasRemote = true;
-		NSArray * comp = [string componentsSeparatedByString:@":"];
-		if( [comp count] > 1){
-			stat.remoteName = [ [comp objectAtIndex:0] UTF8String];
-		}else{
-			stat.remoteName = "??";
-		}
+		stat.remoteName = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] UTF8String];
 	}else{
-		NSLog(@"This Git Repo (%@) has NO remote", [s lastPathComponent]);
+		//NSLog(@"This Git Repo (%@) has NO remote", [s lastPathComponent]);
 		//[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 		stat.hasRemote = false;
 	}
@@ -218,8 +210,7 @@ using namespace std;
 	std::string key = [s UTF8String];
 	gitRepoStat stat = gitDirStats[key];
 	if ([string length] > 0){
-		NSLog(@"This Git Repo (%@) has a remote diff _%@_ ", [s lastPathComponent], string);
-		int val = [string intValue];
+		//NSLog(@"This Git Repo (%@) has a remote diff _%@_ ", [s lastPathComponent], string);
 		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		NSArray * comp = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] componentsSeparatedByString:@","];
 		if ([comp count] > 1){
@@ -229,7 +220,7 @@ using namespace std;
 		}
 
 	}else{
-		NSLog(@"This Git Repo (%@) has NO remote diff", [s lastPathComponent]);
+		//NSLog(@"This Git Repo (%@) has NO remote diff", [s lastPathComponent]);
 	}
 	gitDirStats[key] = stat;
 	[string release];
@@ -358,25 +349,24 @@ using namespace std;
 			gitRepoStat stat = gitDirStats[key];
 
 			if( !stat.isDirty ){ //not locally dirty
-
 				if (stat.hasRemote){
 					if(stat.remoteDiffs == ""){ //nothing pending on remote
-						return [NSImage imageNamed: @"green"]; //code away! u r in sync with remote
+						return [NSImage imageNamed: @"1"]; //code away! u r in sync with remote
 					}else{	//remote has newer stuff, we are old
-						return [NSImage imageNamed: @"blue"];	//u should pull!
+						return [NSImage imageNamed: @"2"];	//u should pull!
 					}
 				}else{	//only local
-					return [NSImage imageNamed: @"green"];
+					return [NSImage imageNamed: @"3"];
 				}
 			}else{ //local repo is dirty
 				if (stat.hasRemote){
 					if(stat.remoteDiffs == ""){ //nothing pending on remote
-						return [NSImage imageNamed: @"orange"]; // we should push to remote
+						return [NSImage imageNamed: @"4"]; // we should push to remote
 					}else{	//remote has newer stuff, we are old, and we are dirty too >> need to merge!!
-						return [NSImage imageNamed: @"red"];
+						return [NSImage imageNamed: @"5"];
 					}
 				}else{	//only local
-					return [NSImage imageNamed: @"yellow"]; //u should push!
+					return [NSImage imageNamed: @"6"]; //u should commit!
 				}
 			}
 		}else
@@ -428,11 +418,12 @@ using namespace std;
 			
 		if ([[tableColumn identifier] isEqualTo: @"path"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			return s;
+			return [[s stringByReplacingOccurrencesOfString:[drop getPath] withString:@"➤"] stringByDeletingLastPathComponent];
 		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"repo"]){
-			return [s lastPathComponent];
+			[[tableColumn dataCell] setVerticalCentering:YES];
+			return [NSString stringWithFormat:@" %@", [s lastPathComponent] ];
 		}
 	}
 	return nil;
