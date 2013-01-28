@@ -37,7 +37,7 @@
 	NSUserDefaults * d = [NSUserDefaults standardUserDefaults];
 	scanPath = [d objectForKey:@"scanPath"];
 	if(scanPath){
-		[pathBar setURL:[NSURL fileURLWithPath:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+		[pathBar setURL:[NSURL fileURLWithPath:scanPath ]];
 	}else{
 		[self setImage: nil];
 		[pathBar setURL:[NSURL fileURLWithPath:@"/"]];

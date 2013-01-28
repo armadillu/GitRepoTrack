@@ -216,7 +216,7 @@ using namespace std;
 		if ([comp count] > 1){
 			stat.remoteDiffs = [[[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@" changed" withString:@""] UTF8String];
 		}else{
-			stat.remoteDiffs = "???";
+			stat.remoteDiffs = "";
 		}
 
 	}else{
@@ -418,7 +418,7 @@ using namespace std;
 			
 		if ([[tableColumn identifier] isEqualTo: @"path"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			return [[s stringByReplacingOccurrencesOfString:[drop getPath] withString:@"➤"] stringByDeletingLastPathComponent];
+			return [s stringByReplacingOccurrencesOfString:[drop getPath] withString:@"➤"];
 		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"repo"]){
@@ -456,7 +456,7 @@ using namespace std;
 			s = [gitDirs objectAtIndex:row];
 		}
 	}
-	NSLog(@"edit>>%@", s);
+	//NSLog(@"edit >> %@", s);
 	//NSURL *fileURL = [NSURL fileURLWithPath: s];
 	//[[NSWorkspace sharedWorkspace] openURL: fileURL];
 	[self openTerminal:self path: s];

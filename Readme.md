@@ -8,4 +8,4 @@ Repositories with uncommited changes will show a red status, and "clean" ones a 
 
 You can double-click any repo on the list to open a terminal window at that location.
 
-![image](http://farm9.staticflickr.com/8056/8389907031_2e2e056e02.jpg)
+![image](http://farm9.staticflickr.com/8055/8421274469_e7eaca1cdb_z.jpg)

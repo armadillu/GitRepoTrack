@@ -1438,6 +1438,7 @@
 														<int key="NSStyle">0</int>
 														<bool key="NSAnimates">NO</bool>
 													</object>
+													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="1060465259"/>
 												</object>
 												<object class="NSTableColumn" id="75336152">
@@ -1527,8 +1528,8 @@
 														<reference key="NSTextColor" ref="800369347"/>
 													</object>
 													<object class="NSTextFieldCell" key="NSDataCell" id="360468906">
-														<int key="NSCellFlags">337641536</int>
-														<int key="NSCellFlags2">5632</int>
+														<int key="NSCellFlags">338690112</int>
+														<int key="NSCellFlags2">5120</int>
 														<string key="NSContents">Text Cell</string>
 														<reference key="NSSupport" ref="208241257"/>
 														<reference key="NSControlView" ref="1060465259"/>
