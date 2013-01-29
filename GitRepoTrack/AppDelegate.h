@@ -18,17 +18,18 @@ using namespace std;
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
 	struct gitRepoStat{
-		gitRepoStat(){ localModifications = 0; hasRemote = false; remoteModifications = 0; remoteName = ""; isDirty = false;}
+		gitRepoStat(){ localModifications = 0; remoteError = false; hasRemote = false; remoteModifications = 0; remoteName = ""; isDirty = false;}
 		int localModifications; //num
 		bool hasRemote;
 		bool isDirty; //has local changes
+		bool remoteError;
 		string remoteName;
+		string remoteURL;
 		string remoteDiffs;
 		int remoteModifications; //todo
 	};
 	NSMutableArray * gitDirs;
 
-	//NSMutableDictionary* numModifiedFiles;
 	map<string, gitRepoStat> gitDirStats;
 
 	IBOutlet NSTableView * table;

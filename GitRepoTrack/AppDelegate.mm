@@ -21,7 +21,6 @@ using namespace std;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	gitDirs = [[NSMutableArray alloc] initWithCapacity:100];
-	//numModifiedFiles = [[NSMutableDictionary alloc] initWithCapacity:100];
 	scanning = false;
 
 	//auto start scan at launch if a path is already set
@@ -52,7 +51,6 @@ using namespace std;
 
 	if (!scanning){ // start the scan!
 		[gitDirs removeAllObjects];
-		//[numModifiedFiles removeAllObjects];
 		gitDirStats.clear();
 		[table reloadData];
 		//[self startScan];
@@ -70,11 +68,13 @@ using namespace std;
 	scanning = true;
 	//[startButton setEnabled:false];
 	[startButton setTitle:@"Stop Scan!"];
+	[drop setEnabled:false];
 	[progress startAnimation:self];
 
 	NSString * startAt = [[drop getPath] retain];
 	[self scan:startAt];
 	//[startButton setEnabled:true];
+	[drop setEnabled:true];
 	[startButton setTitle:@"Scan!"];
 	[progress stopAnimation:self];
 	scanning = false;
@@ -146,10 +146,8 @@ using namespace std;
 	if ([string length] > 0){
 		int val = [string intValue];
 		//NSLog(@"This Git Repo has _%@_ mod files (%d)", @"", val);
-		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.localModifications = val;
 	}else{
-		//[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 		stat.localModifications = 0;
 	}
 	gitDirStats[key] = stat;
@@ -162,7 +160,7 @@ using namespace std;
 	[task setLaunchPath:@"/bin/sh"];
 	[task setCurrentDirectoryPath:s];
 	// /bin/sh -c trick to complex pipes from http://borkware.com/quickies/one?topic=nstask
-	[task setArguments:[NSArray arrayWithObjects:@"-c", @"/usr/bin/git remote -v | grep fetch | awk ' { print $2 } ' ",  nil]];
+	[task setArguments:[NSArray arrayWithObjects:@"-c", @"/usr/bin/git remote -v | head -1",  nil]];
 
 	NSPipe *pipe = [NSPipe pipe];
 	[task setStandardOutput:pipe];
@@ -177,12 +175,18 @@ using namespace std;
 	if ([string length] > 0){
 		//NSLog(@"This Git Repo (%@) has a remote _%@_ ", [s lastPathComponent], string);
 		int val = [string intValue];
-		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
 		stat.hasRemote = true;
-		stat.remoteName = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] UTF8String];
+		NSArray * split = [string componentsSeparatedByString:@"	"]; // tab separated >> "origin (tab) git@github.com:armadillu/ofxTouchHelper.git"
+		if ( [split count] >= 2){
+			stat.remoteName = [[[split objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\n" withString:@""] UTF8String];
+			stat.remoteURL = [[[split objectAtIndex:1] stringByReplacingOccurrencesOfString:@"(fetch)\n" withString:@""] UTF8String];
+		}else{
+			stat.remoteName = "??";
+			stat.remoteName = "???";
+		}
+
 	}else{
 		//NSLog(@"This Git Repo (%@) has NO remote", [s lastPathComponent]);
-		//[numModifiedFiles setObject:[NSNumber numberWithInt:0] forKey:s];
 		stat.hasRemote = false;
 	}
 	gitDirStats[key] = stat;
@@ -192,38 +196,51 @@ using namespace std;
 
 -(void)remoteDiff:(NSString *) s{
 
+	//NSLog(@"remoteDiff: (%@) ", [s lastPathComponent]);
+	std::string key = [s UTF8String];
+	gitRepoStat stat = gitDirStats[key];
+
 	NSTask * task = [[NSTask alloc] init];
 	[task setLaunchPath:@"/bin/sh"];
 	[task setCurrentDirectoryPath:s];
 	// /bin/sh -c trick to complex pipes from http://borkware.com/quickies/one?topic=nstask
-	//git fetch origin -q; git diff -w --shortstat  origin/master;
-	[task setArguments:[NSArray arrayWithObjects:@"-c", @"/usr/bin/git fetch origin -q; /usr/bin/git diff -w --shortstat  origin/master; ",  nil]];
+	NSString * command = [NSString stringWithFormat:
+						  @"/usr/bin/git fetch %s -q; /usr/bin/git diff -w --shortstat  master %s/master;",
+						  stat.remoteName.c_str(), stat.remoteName.c_str()
+						  ];
+	[task setArguments:[NSArray arrayWithObjects:@"-c", command,  nil]];
 
 	NSPipe *pipe = [NSPipe pipe];
+	NSPipe *pipeErr = [NSPipe pipe];
 	[task setStandardOutput:pipe];
+	[task setStandardError:pipeErr];
 	[task launch];
 	NSData * data = [[pipe fileHandleForReading] readDataToEndOfFile];
+	NSData * dataErr = [[pipeErr fileHandleForReading] readDataToEndOfFile];
 	[task waitUntilExit];
 	[task release];
 	NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] ;
+	NSString * stringErr = [[NSString alloc] initWithData:dataErr encoding:NSUTF8StringEncoding] ;
 
-	std::string key = [s UTF8String];
-	gitRepoStat stat = gitDirStats[key];
-	if ([string length] > 0){
-		//NSLog(@"This Git Repo (%@) has a remote diff _%@_ ", [s lastPathComponent], string);
-		//[numModifiedFiles setObject:[NSNumber numberWithInt:val] forKey:s];
-		NSArray * comp = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] componentsSeparatedByString:@","];
-		if ([comp count] > 1){
-			stat.remoteDiffs = [[[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@" changed" withString:@""] UTF8String];
-		}else{
-			stat.remoteDiffs = "";
-		}
-
+	if([stringErr length] > 0 ){
+		stat.remoteError = true;
+		NSLog(@"Error at remoteDiff for repo %@ >> %@", [s lastPathComponent], [stringErr stringByReplacingOccurrencesOfString:@"\n" withString:@" "]);
 	}else{
-		//NSLog(@"This Git Repo (%@) has NO remote diff", [s lastPathComponent]);
+		if ([string length] > 0){
+			NSArray * comp = [[string stringByReplacingOccurrencesOfString:@"\n" withString:@""] componentsSeparatedByString:@","];
+			if ([comp count] > 1){
+				stat.remoteDiffs = [[[comp objectAtIndex:0] stringByReplacingOccurrencesOfString:@" changed" withString:@""] UTF8String];
+			}else{
+				stat.remoteDiffs = "";
+			}
+		}else{
+			//NSLog(@"This Git Repo (%@) has NO remote diff", [s lastPathComponent]);
+		}
 	}
+
 	gitDirStats[key] = stat;
 	[string release];
+	[stringErr release];
 }
 
 
@@ -348,22 +365,30 @@ using namespace std;
 			std::string key = [s UTF8String];
 			gitRepoStat stat = gitDirStats[key];
 
-			if( !stat.isDirty ){ //not locally dirty
+			if( !stat.isDirty ){ //local repo is clean
 				if (stat.hasRemote){
-					if(stat.remoteDiffs == ""){ //nothing pending on remote
-						return [NSImage imageNamed: @"1"]; //code away! u r in sync with remote
-					}else{	//remote has newer stuff, we are old
-						return [NSImage imageNamed: @"2"];	//u should pull!
+					if(stat.remoteError){
+						return [NSImage imageNamed: @"7"]; //err with remote, local clean
+					}else{
+						if(stat.remoteDiffs == ""){ //nothing pending on remote
+							return [NSImage imageNamed: @"1"]; //code away! u r in sync with remote
+						}else{	//remote has newer stuff, we are old
+							return [NSImage imageNamed: @"2"];	//u should pull!
+						}
 					}
 				}else{	//only local
 					return [NSImage imageNamed: @"3"];
 				}
 			}else{ //local repo is dirty
 				if (stat.hasRemote){
-					if(stat.remoteDiffs == ""){ //nothing pending on remote
-						return [NSImage imageNamed: @"4"]; // we should push to remote
-					}else{	//remote has newer stuff, we are old, and we are dirty too >> need to merge!!
-						return [NSImage imageNamed: @"5"];
+					if(stat.remoteError){
+						return [NSImage imageNamed: @"8"]; //err with remote, local dirty
+					}else{
+						if(stat.remoteDiffs == ""){ //nothing pending on remote
+							return [NSImage imageNamed: @"4"]; // we should push to remote
+						}else{	//remote has newer stuff, we are old, and we are dirty too >> need to merge!!
+							return [NSImage imageNamed: @"5"];
+						}
 					}
 				}else{	//only local
 					return [NSImage imageNamed: @"6"]; //u should commit!
@@ -376,10 +401,15 @@ using namespace std;
 			[[tableColumn dataCell] setVerticalCentering:YES];
 			if ( row < gitDirStats.size() ){
 				std::string key = [s UTF8String];
-				int val = gitDirStats[key].localModifications;
+				gitRepoStat stat = gitDirStats[key];
+				int val = stat.localModifications;
 				if ( val > 0 ){
-					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
-					return [NSString stringWithFormat:@"%d files", val];
+//					if (stat.hasRemote){
+//						[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:5/255. blue:204/255. alpha:1]];
+//					}else{
+//						[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:180/255. green:0/255. blue:2/255. alpha:1]];
+//					}
+					return [NSString stringWithFormat: (val==1 ? @"%d file" : @"%d files") , val];
 				}else{
 					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:112/255. green:167/255. blue:37/255. alpha:1]];
 					return nil;
@@ -396,7 +426,8 @@ using namespace std;
 				gitRepoStat stat = gitDirStats[key];
 				if ( stat.hasRemote ){
 					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
-					return [self stringFromString: stat.remoteName] ;
+					//return [self stringFromString: stat.remoteName + " - " + stat.remoteURL] ;
+					return [self stringFromString: stat.remoteURL] ;
 				}else{
 					//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:112/255. green:167/255. blue:37/255. alpha:1]];
 					return nil;
@@ -410,7 +441,7 @@ using namespace std;
 			if ( row < gitDirStats.size() ){
 				std::string key = [s UTF8String];
 				gitRepoStat stat = gitDirStats[key];
-				//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:150/255. green:42/255. blue:50/255. alpha:1]];
+				//[[tableColumn dataCell] setTextColor: [NSColor colorWithDeviceRed:22/255. green:160/255. blue:233/255. alpha:1]];
 				return [self stringFromString: stat.remoteDiffs] ;
 			}
 		}else

@@ -100,7 +100,7 @@
 			NSString *path = [fileArray objectAtIndex:0];
 			scanPath = path;
 			[scanPath retain];
-			NSURL * url = [NSURL fileURLWithPath:[scanPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+			NSURL * url = [NSURL fileURLWithPath:scanPath ];
 			//NSLog(@"url: %@", url);
 
 			[pathBar performSelectorOnMainThread:@selector(setURL:) withObject:url waitUntilDone:NO];
