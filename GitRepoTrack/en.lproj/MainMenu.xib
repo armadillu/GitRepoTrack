@@ -186,7 +186,7 @@
 							<string key="NSName">_NSAppleMenu</string>
 						</object>
 					</object>
-					<object class="NSMenuItem" id="926358495">
+					<object class="NSMenuItem" id="410553784">
 						<reference key="NSMenu" ref="649796088"/>
 						<string key="NSTitle">Scan</string>
 						<string key="NSKeyEquiv"/>
@@ -194,11 +194,11 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 						<string key="NSAction">submenuAction:</string>
-						<object class="NSMenu" key="NSSubmenu" id="42460667">
+						<object class="NSMenu" key="NSSubmenu" id="15034770">
 							<string key="NSTitle">Scan</string>
 							<array class="NSMutableArray" key="NSMenuItems">
-								<object class="NSMenuItem" id="205094670">
-									<reference key="NSMenu" ref="42460667"/>
+								<object class="NSMenuItem" id="894460688">
+									<reference key="NSMenu" ref="15034770"/>
 									<string key="NSTitle">Start/Stop Scan</string>
 									<string key="NSKeyEquiv">s</string>
 									<int key="NSKeyEquivModMask">1048576</int>
@@ -1067,7 +1067,7 @@
 								<string>Apple URL pasteboard type</string>
 								<string>NSFilenamesPboardType</string>
 							</set>
-							<string key="NSFrame">{{50, 12}, {218, 20}}</string>
+							<string key="NSFrame">{{50, 12}, {187, 20}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1017557265"/>
@@ -1128,17 +1128,17 @@
 						<object class="NSButton" id="551246182">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{390, 9}, {84, 25}}</string>
+							<string key="NSFrame">{{404, 9}, {91, 25}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="154022298"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:22</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="373545919">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">134283264</int>
 								<string key="NSContents">Scan!</string>
-								<object class="NSFont" key="NSSupport" id="1001192392">
+								<object class="NSFont" key="NSSupport" id="813231915">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">1044</int>
@@ -1147,7 +1147,7 @@
 								<reference key="NSControlView" ref="551246182"/>
 								<int key="NSButtonFlags">-2033303552</int>
 								<int key="NSButtonFlags2">160</int>
-								<reference key="NSAlternateImage" ref="1001192392"/>
+								<reference key="NSAlternateImage" ref="813231915"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -1187,10 +1187,10 @@
 						<object class="NSProgressIndicator" id="154022298">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{482, 14}, {16, 16}}</string>
+							<string key="NSFrame">{{380, 14}, {16, 16}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
+							<reference key="NSNextKeyView" ref="551246182"/>
 							<string key="NSReuseIdentifierKey">_NS:945</string>
 							<int key="NSpiFlags">28938</int>
 							<double key="NSMaxValue">100</double>
@@ -1256,17 +1256,17 @@
 						<object class="NSButton" id="1017557265">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{279, 13}, {102, 18}}</string>
+							<string key="NSFrame">{{257, 13}, {117, 18}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="551246182"/>
+							<reference key="NSNextKeyView" ref="154022298"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="729535506">
 								<int key="NSCellFlags">-2080374784</int>
-								<int key="NSCellFlags2">268566528</int>
+								<int key="NSCellFlags2">268435456</int>
 								<string key="NSContents">include remote</string>
-								<reference key="NSSupport" ref="26"/>
+								<reference key="NSSupport" ref="813231915"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="1017557265"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -1710,7 +1710,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">startScanButtonPressed:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="205094670"/>
+						<reference key="destination" ref="894460688"/>
 					</object>
 					<int key="connectionID">604</int>
 				</object>
@@ -1789,7 +1789,7 @@
 							<reference ref="694149608"/>
 							<reference ref="952259628"/>
 							<reference ref="448692316"/>
-							<reference ref="926358495"/>
+							<reference ref="410553784"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -2462,24 +2462,24 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">599</int>
-						<reference key="object" ref="926358495"/>
+						<reference key="object" ref="410553784"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="42460667"/>
+							<reference ref="15034770"/>
 						</array>
 						<reference key="parent" ref="649796088"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">600</int>
-						<reference key="object" ref="42460667"/>
+						<reference key="object" ref="15034770"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="205094670"/>
+							<reference ref="894460688"/>
 						</array>
-						<reference key="parent" ref="926358495"/>
+						<reference key="parent" ref="410553784"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">601</int>
-						<reference key="object" ref="205094670"/>
-						<reference key="parent" ref="42460667"/>
+						<reference key="object" ref="894460688"/>
+						<reference key="parent" ref="15034770"/>
 					</object>
 				</array>
 			</object>
@@ -2590,6 +2590,14 @@
 				<string key="567.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="568.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="569.CustomClassName">MyImageView</string>
+				<object class="NSMutableDictionary" key="569.IBAttributePlaceholdersKey">
+					<string key="NS.key.0">ToolTip</string>
+					<object class="IBToolTipAttribute" key="NS.object.0">
+						<string key="name">ToolTip</string>
+						<reference key="object" ref="815698434"/>
+						<string key="toolTip">Drop Scan Folder here!</string>
+					</object>
+				</object>
 				<string key="569.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="570.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
