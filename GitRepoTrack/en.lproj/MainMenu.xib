@@ -900,6 +900,33 @@
 													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="1060465259"/>
 												</object>
+												<object class="NSTableColumn" id="601418517">
+													<string key="NSIdentifier">lines</string>
+													<double key="NSWidth">50</double>
+													<double key="NSMinWidth">40</double>
+													<double key="NSMaxWidth">60</double>
+													<object class="NSTableHeaderCell" key="NSHeaderCell">
+														<int key="NSCellFlags">75497536</int>
+														<int key="NSCellFlags2">134219776</int>
+														<string key="NSContents">Lines</string>
+														<reference key="NSSupport" ref="24"/>
+														<reference key="NSBackgroundColor" ref="715504666"/>
+														<reference key="NSTextColor" ref="800369347"/>
+													</object>
+													<object class="NSTextFieldCell" key="NSDataCell" id="584282647">
+														<int key="NSCellFlags">67108928</int>
+														<int key="NSCellFlags2">167778368</int>
+														<string key="NSContents">(4)</string>
+														<reference key="NSSupport" ref="208241257"/>
+														<reference key="NSControlView" ref="1060465259"/>
+														<reference key="NSBackgroundColor" ref="770720745"/>
+														<reference key="NSTextColor" ref="715504666"/>
+													</object>
+													<int key="NSResizingMask">2</int>
+													<bool key="NSIsResizeable">YES</bool>
+													<bool key="NSIsEditable">YES</bool>
+													<reference key="NSTableView" ref="1060465259"/>
+												</object>
 												<object class="NSTableColumn" id="173559025">
 													<string key="NSIdentifier">path</string>
 													<double key="NSWidth">66</double>
@@ -932,7 +959,7 @@
 												</object>
 												<object class="NSTableColumn" id="1039311463">
 													<string key="NSIdentifier">remoteName</string>
-													<double key="NSWidth">94</double>
+													<double key="NSWidth">41</double>
 													<double key="NSMinWidth">10</double>
 													<double key="NSMaxWidth">3.4028234663852886e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1012,7 +1039,7 @@
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="727393593"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.95129870129870131</double>
+									<double key="NSPercent">0.95114006514657978</double>
 								</object>
 								<object class="NSScroller" id="754497640">
 									<reference key="NSNextResponder" ref="727393593"/>
@@ -2294,6 +2321,7 @@
 							<reference ref="1037146102"/>
 							<reference ref="173559025"/>
 							<reference ref="1034076691"/>
+							<reference ref="601418517"/>
 						</array>
 						<reference key="parent" ref="727393593"/>
 					</object>
@@ -2481,6 +2509,19 @@
 						<reference key="object" ref="894460688"/>
 						<reference key="parent" ref="15034770"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">605</int>
+						<reference key="object" ref="601418517"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="584282647"/>
+						</array>
+						<reference key="parent" ref="1060465259"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">606</int>
+						<reference key="object" ref="584282647"/>
+						<reference key="parent" ref="601418517"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2617,13 +2658,15 @@
 				<string key="599.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="600.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="601.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="605.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="606.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">604</int>
+			<int key="maxID">606</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

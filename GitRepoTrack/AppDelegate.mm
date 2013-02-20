@@ -119,6 +119,40 @@ using namespace std;
 	[string release];
 }
 
+-(void)checkSourceCodeLines:(NSString *) s{
+
+	// git ls-files | grep  -e '\.m$' -e '\.h$' -e '\.mm$' -e '\.c$' -e '\.cpp$' -e '\.java$' -e '\.php$' -e '\.js$' -e '\.html$' -e '\.css$' -e '\.sh$' -e '\.py$' -e '\.frag$' -e '\.vert$' -e '\.geom$' -e '\.rb$' -e '\.pde$' -e '\.lua$' -e '\.pl$' | xargs wc -l | tail -1 | awk ' { print $1 } '
+
+
+	NSTask * task = [[NSTask alloc] init];
+	[task setLaunchPath:@"/bin/sh"];
+	[task setCurrentDirectoryPath:s];
+	[task setArguments: [NSArray arrayWithObjects:@"-c", @"/usr/bin/git ls-files | grep  -e '\.m$' -e '\.h$' -e '\.mm$' -e '\.txt$' -e '\.c$' -e '\.cpp$' -e '\.java$' -e '\.php$' -e '\.js$' -e '\.html$' -e '\.css$' -e '\.sh$' -e '\.py$' -e '\.frag$' -e '\.vert$' -e '\.geom$' -e '\.rb$' -e '\.pde$' -e '\.lua$' -e '\.pl$' | xargs -I{} wc -l {} | awk ' { print $1 } ' | awk '{s+=$1} END {print s}' ", nil]];
+	NSPipe *pipe = [NSPipe pipe];
+	[task setStandardOutput:pipe];
+	[task launch];
+	NSData * data = [[pipe fileHandleForReading] readDataToEndOfFile];
+	[task waitUntilExit];
+	[task release];
+	NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+	if ([string length] > 0){
+		std::string key = [s UTF8String];
+		//NSLog(@"This Git Repo Has %@ lines: %@ ", string, s );
+		@synchronized (self) {
+			gitRepoStat stat = gitDirStats[key];
+			stat.numLines = [string intValue];
+			stat.numLines = [string intValue];
+			gitDirStats[key] = stat;
+			NSLog(@"%@ has %d lines", s, stat.numLines);
+		}
+	}
+	[string release];
+
+
+}
+
+
 
 -(void)checkNumberOfModifiedFiles:(NSString *) s{
 
@@ -262,6 +296,8 @@ using namespace std;
 		}
 		[self checkIfDirty:s];
 		[self checkNumberOfModifiedFiles:s];
+		[self checkSourceCodeLines:s];
+		
 		if ( [checkRemoteCheckbox state]){
 			BOOL hasRemote = [self checkForRemote:s];
 			if (hasRemote){
@@ -269,7 +305,7 @@ using namespace std;
 			}
 		}
 		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
-		//NSLog(@"This dir is a GIT repo! %@", gitPath);
+
 	}else{
 
 		for( NSString* item in dirs){
@@ -416,6 +452,16 @@ using namespace std;
 				}
 			}
 		}else
+
+
+			if ([[tableColumn identifier] isEqualTo: @"lines"]){
+				[[tableColumn dataCell] setVerticalCentering:YES];
+				if ( row < gitDirStats.size() ){
+					std::string key = [s UTF8String];
+					gitRepoStat stat = gitDirStats[key];
+					return [NSString stringWithFormat:@"%d", stat.numLines] ;
+				}
+			}else
 
 
 		if ([[tableColumn identifier] isEqualTo: @"remoteName"]){

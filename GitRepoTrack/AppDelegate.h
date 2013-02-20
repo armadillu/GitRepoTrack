@@ -18,7 +18,7 @@ using namespace std;
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
 	struct gitRepoStat{
-		gitRepoStat(){ localModifications = 0; remoteError = false; hasRemote = false; remoteModifications = 0; remoteName = ""; isDirty = false;}
+		gitRepoStat(){ numLines = 0; localModifications = 0; remoteError = false; hasRemote = false; remoteModifications = 0; remoteName = ""; isDirty = false;}
 		int localModifications; //num
 		bool hasRemote;
 		bool isDirty; //has local changes
@@ -27,7 +27,9 @@ using namespace std;
 		string remoteURL;
 		string remoteDiffs;
 		int remoteModifications; //todo
+		int numLines;
 	};
+	
 	NSMutableArray * gitDirs;
 
 	map<string, gitRepoStat> gitDirStats;
