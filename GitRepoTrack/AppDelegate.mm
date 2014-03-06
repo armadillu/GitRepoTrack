@@ -504,7 +504,7 @@ using namespace std;
 			
 		if ([[tableColumn identifier] isEqualTo: @"path"]){
 			[[tableColumn dataCell] setVerticalCentering:YES];
-			return [s stringByReplacingOccurrencesOfString:[drop getPath] withString:@"➤"];
+			return [s stringByReplacingOccurrencesOfString:[drop getPath] withString:@"📂"];
 		}else
 
 		if ([[tableColumn identifier] isEqualTo: @"repo"]){
