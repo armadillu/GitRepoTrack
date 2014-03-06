@@ -73,6 +73,8 @@ using namespace std;
 
 	NSString * startAt = [[drop getPath] retain];
 	[self scan:startAt];
+	[startAt release];
+
 	//[startButton setEnabled:true];
 	[drop setEnabled:true];
 	[startButton setTitle:@"Scan!"];
@@ -289,8 +291,14 @@ using namespace std;
 	NSArray * dirs = [fm contentsOfDirectoryAtPath:s error:nil];
 	NSString * gitPath = [NSString stringWithFormat:@"%@/.git", s ];
 
-	//if this dir contains a .git init, add to gitDirs and stop diving in that tree branch
-	if( [fm fileExistsAtPath:gitPath isDirectory:&isDir] ){
+	//if this dir contains a .git init, add to gitDirs and continue diving in that tree branch
+	BOOL exists = [fm fileExistsAtPath:gitPath isDirectory:&isDir];
+	NSDictionary * atts = [fm attributesOfItemAtPath: s error:nil];
+	BOOL isSymLink = [atts objectForKey:NSFileType] == NSFileTypeSymbolicLink;
+	//if (isSymLink) NSLog(@"GitRepoHub doesn't follow symlinks! %@", s);
+
+	if( exists && !isSymLink ){
+
 		@synchronized (self) {
 			[gitDirs addObject: s];
 		}
@@ -306,7 +314,8 @@ using namespace std;
 		}
 		[self performSelectorOnMainThread:@selector(updateTable) withObject:nil waitUntilDone:YES];
 
-	}else{
+	}
+//	else{
 
 		for( NSString* item in dirs){
 			NSString * path = [NSString stringWithFormat:@"%@/%@", s, item ];
@@ -322,7 +331,7 @@ using namespace std;
 				}
 			}
 		}
-	}
+//	}
 }
 
 
